@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hello and welcome to your Coolors dupe
+the app will be very similar to [Coolors](https://coolors.co/1b2f33-28502e-47682c-8c7051-ef3054) and should let the user generate beautiful color palettes. see more detailed features [below](#features)
+
+this is a next.js app that uses typeScript and has been prepared to use tailwind, feel free to change the styling to your preference though
+
+feel free to handle the color data as you please but here is a suggestion of a [color api](https://www.thecolorapi.com/)
+
+all tests can be found in the `@/tests` directory
 
 ## Getting Started
 
-First, run the development server:
+run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+run the tests once:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run test
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+run the tests continuously:
 
-## Learn More
+```bash
+npm run test:watch
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Features
+- a header with the page name
+- display 5 random colors on page load
+- see the name of the color
+- change a color by entering a new hex code in an input
+- click a button to randomise a new color for any of the existing colors
+- click a button to add a new color to the list
+  - the new color should have a random, initial color
+  - you can never display more than 10 colors
+- click a button to remove a color
+  - you can never display less than two colors
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Components
+- Header
+- ColorList
+- ColorItem
+- AddColor
+- RemoveColor
+- ChangeColor
