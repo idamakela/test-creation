@@ -51,6 +51,28 @@ describe('Color item', () => {
 
       expect(hexInput).not.toBeInTheDocument()
     })
+
+    test('the hex code is always displayed with seven characters', () => {
+      const { color, ...rest } = mockProps
+      const colorWithShortHex = {
+        hex: '#FFF',
+        name: 'white',
+        id: 1
+      }
+
+      render(
+        <ColorItem
+          color={colorWithShortHex}
+          {...rest}
+        />
+      )
+
+      const hexButton = screen.getByRole('button', { name: /#FFFFF/i })
+      const textLenght = hexButton.textContent?.length
+
+      expect(textLenght).toBe(7)
+
+    })
   })
 
   describe('functions as expected', () => {
