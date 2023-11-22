@@ -3,7 +3,8 @@ import ChangeColor from '@/components/ChangeColor'
 
 const mockColor = {
   hex: '#4C98FB',
-  name: 'blue'
+  name: 'blue',
+  id: 1
 }
 
 const mockProps = {
