@@ -10,9 +10,9 @@ const mockColor = {
 
 const mockProps = {
   color: mockColor,
-  add: jest.fn(),
-  remove: jest.fn(),
-  change: jest.fn(),
+  addRandomColor: jest.fn(),
+  removeColor: jest.fn(),
+  changeColor: jest.fn(),
 }
 
 describe('Color item', () => {

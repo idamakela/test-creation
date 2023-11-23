@@ -8,7 +8,7 @@ const mockColor = {
 }
 
 const mockProps = {
-  remove: jest.fn(),
+  removeColor: jest.fn(),
   color: mockColor
 }
 
@@ -28,6 +28,6 @@ describe('Remove color', () => {
 
     fireEvent.click(button)
 
-    expect(mockProps.remove).toHaveBeenCalled()
+    expect(mockProps.removeColor).toHaveBeenCalled()
   })
 })

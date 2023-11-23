@@ -10,7 +10,7 @@ const mockColor = {
 const mockProps = {
   color: mockColor,
   inputRef: null,
-  change: jest.fn(),
+  changeColor: jest.fn(),
   disableEditing: jest.fn()
 }
 
@@ -63,7 +63,7 @@ describe('Change color', () => {
 
       fireEvent.submit(form)
 
-      expect(mockProps.change).toHaveBeenCalled()
+      expect(mockProps.changeColor).toHaveBeenCalled()
     })
   })
 })

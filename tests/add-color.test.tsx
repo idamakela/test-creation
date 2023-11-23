@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import AddColor from '@/components/AddColor'
 
 const mockProps = {
-  add: jest.fn()
+  addRandomColor: jest.fn()
 }
 
 describe('Add color', () => {
@@ -21,6 +21,6 @@ describe('Add color', () => {
 
     fireEvent.click(button)
 
-    expect(mockProps.add).toHaveBeenCalled()
+    expect(mockProps.addRandomColor).toHaveBeenCalled()
   })
 })
