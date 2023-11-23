@@ -32,12 +32,12 @@ npm run test:watch
 - display 5 random colors on page load
 - see the name of the color
 - change a color by entering a new hex code in an input
-- click a button to randomise a new color for any of the existing colors
 - click a button to add a new color to the list
   - the new color should have a random, initial color
   - you can never display more than 10 colors
 - click a button to remove a color
   - you can never display less than two colors
+- click a button in the header to randomize a new color for all the existing color items
 
 ### Components
 - Header
