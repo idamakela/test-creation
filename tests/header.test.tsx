@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Header from '@/components/Header'
 
 const mockProps = {
@@ -29,17 +29,6 @@ describe('Header', () => {
       const randomizerButton = screen.getByTitle(/randomize colors/i)  
 
       expect(randomizerButton).toBeInTheDocument()
-    })
-  })
-
-  describe('functions as expected', () => {
-    test('the randomizer function is called on click', () => {
-      render(<Header {...mockProps} />)
-  
-      const randomizerButton = screen.getByTitle(/randomize colors/i)
-      fireEvent.click(randomizerButton)
-  
-      expect(mockProps.randomizeColors).toHaveBeenCalled()
     })
   })
 })

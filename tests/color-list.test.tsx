@@ -1,13 +1,9 @@
 import { screen, render } from '@testing-library/react'
 import ColorList from '@/components/ColorList'
-
-const mockColors = [
-  { hex: '#4C98FB', name: 'blue' },
-  { hex: '#EF4444', name: 'red' },
-]
+import { hexcolorRegex, mockColor, isUnique } from './utils'
 
 const mockProps = {
-  colors: mockColors,
+  colors: [mockColor, { hex: '#EF4444', name: 'red' }],
   setColors: jest.fn()
 }
 
@@ -26,12 +22,10 @@ describe('Color list', () => {
     test('the same color should never be displayed at multiple places at once', () => {
       render(<ColorList {...mockProps} />)
 
-      const hexButtons = screen.getAllByRole('button', { name: /^#?[a-f0-9]{6}$/i })
-      const hexCodes = hexButtons.map(button => button.textContent)
+      const hexButtons = screen.getAllByRole('button', { name: hexcolorRegex })
+      const hexColors = hexButtons.map(button => button.textContent)
 
-      const isUnique = (array: any[]) => new Set(array).size === array.length
-
-      expect(isUnique(hexCodes)).toBeTruthy()
+      expect(isUnique(hexColors)).toBeTruthy()
     })
 
     test('the last color item should not have an add button', () => {

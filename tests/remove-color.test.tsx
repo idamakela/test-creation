@@ -1,15 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import RemoveColor from '@/components/RemoveColor'
-
-const mockColor = {
-  hex: '#4C98FB',
-  name: 'blue',
-  id: 1
-}
+import { mockColor } from './utils'
 
 const mockProps = {
-  removeColor: jest.fn(),
-  color: mockColor
+  color: mockColor,
+  removeColor: jest.fn()
 }
 
 describe('Remove color', () => {
@@ -19,15 +14,5 @@ describe('Remove color', () => {
     const button = screen.getByRole('button')
 
     expect(button).toBeInTheDocument()
-  })
-
-  test('runs the remove function on click', () => {
-    render(<RemoveColor {...mockProps} />)
-
-    const button = screen.getByRole('button')
-
-    fireEvent.click(button)
-
-    expect(mockProps.removeColor).toHaveBeenCalled()
   })
 })

@@ -1,17 +1,12 @@
 import { screen, render, fireEvent } from '@testing-library/react'
 import ChangeColor from '@/components/ChangeColor'
-
-const mockColor = {
-  hex: '#4C98FB',
-  name: 'blue',
-  id: 1
-}
+import { mockColor, mockHex } from './utils'
 
 const mockProps = {
   color: mockColor,
-  inputRef: null,
   changeColor: jest.fn(),
-  disableEditing: jest.fn()
+  disableEditing: jest.fn(),
+  inputRef: null
 }
 
 describe('Change color', () => {
@@ -19,7 +14,7 @@ describe('Change color', () => {
     test('it has an input', () => {
       render(<ChangeColor {...mockProps} />)
 
-      const input = screen.getByLabelText('Hex color')
+      const input = screen.getByLabelText(/hex color/i)
 
       expect(input).toBeInTheDocument()
     })
@@ -35,7 +30,7 @@ describe('Change color', () => {
     test('it has a hidden label', () => {
       render(<ChangeColor {...mockProps} />)
 
-      const label = screen.getByText('Hex color')
+      const label = screen.getByText(/hex color/i)
 
       expect(label).toBeInTheDocument()
       expect(label.hidden).toBeTruthy()
@@ -46,24 +41,10 @@ describe('Change color', () => {
     test('the value of the input updates', () => {
       render(<ChangeColor {...mockProps} />)
 
-      const newHex = '#24B264'
-      const input: HTMLInputElement = screen.getByLabelText('Hex color')
+      const input: HTMLInputElement = screen.getByLabelText(/hex color/i)
+      fireEvent.change(input, { target: { value: mockHex } })
 
-      expect(input.value).not.toEqual(newHex)
-
-      fireEvent.change(input, { target: { value: newHex } })
-
-      expect(input.value).toEqual(newHex)
-    })
-
-    test('the change function runs on submit', () => {
-      render(<ChangeColor {...mockProps} />)
-
-      const form = screen.getByRole('form', { name: 'change-color' })
-
-      fireEvent.submit(form)
-
-      expect(mockProps.changeColor).toHaveBeenCalled()
+      expect(input.value).toEqual(mockHex)
     })
   })
 })

@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import Home from '@/app/page'
+import { hexcolorRegex, mockHex } from './utils'
 
 describe('Home page', () => {
   describe('is rendered correctly', () => {
@@ -17,14 +18,13 @@ describe('Home page', () => {
       render(<Home />)
   
       const colorItems = screen.getAllByRole('listitem')
-      const firstColorItem = colorItems[0]
   
       const buttons = screen.getAllByTitle(/remove color/i)
       fireEvent.click(buttons[0])
 
       const rerenderedColorItems = screen.getAllByRole('listitem')
   
-      expect(rerenderedColorItems[0]).not.toBe(firstColorItem)
+      expect(rerenderedColorItems[0]).not.toBe(colorItems[0])
     })
   
     test('random color can be added', () => {
@@ -35,26 +35,25 @@ describe('Home page', () => {
       
       const colorItems = screen.getAllByRole('listitem')
   
+      // should be changed to not use toBe
       expect(colorItems.length).toBe(6)
     })
 
     test('color can be changed by user input', () => {
       render(<Home />)
-
-      const newHex = '#000000'
       
-      const hexButtons = screen.getAllByRole('button', { name: /^#?[a-f0-9]{6}$/i })
+      const hexButtons = screen.getAllByRole('button', { name: hexcolorRegex })
       fireEvent.click(hexButtons[1])
 
       const hexInput = screen.getByLabelText('Hex color')
-      fireEvent.change(hexInput, { target: { value: newHex } })
+      fireEvent.change(hexInput, { target: { value: mockHex } })
 
       const form = screen.getByRole('form', { name: 'change-color' })
       fireEvent.submit(form)
       
-      const rerenderedHexButtons = screen.getAllByRole('button', { name: /^#?[a-f0-9]{6}$/i })
+      const rerenderedHexButtons = screen.getAllByRole('button', { name: hexcolorRegex })
   
-      expect(rerenderedHexButtons[1]).toHaveTextContent(newHex)
+      expect(rerenderedHexButtons[1]).toHaveTextContent(mockHex)
     })
   })
 })
