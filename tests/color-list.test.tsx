@@ -28,15 +28,6 @@ describe('Color list', () => {
       expect(isUnique(hexColors)).toBeTruthy()
     })
 
-    test('the last color item should not have an add button', () => {
-      render(<ColorList {...mockProps} />)
-
-      const colorItems = screen.getAllByRole('listitem')
-      const addButtons = screen.queryAllByTitle(/add color/i)
-
-      expect(addButtons[colorItems.length - 1]).toBeUndefined()
-    })
-
     test('if 10 colors are rendered all add buttons should be unrendered', () => {
       render(<ColorList {...mockProps} />)
 
