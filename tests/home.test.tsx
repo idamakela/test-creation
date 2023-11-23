@@ -29,14 +29,16 @@ describe('Home page', () => {
   
     test('random color can be added', () => {
       render(<Home />)
-  
-      const buttons = screen.getAllByTitle(/add color/i)
-      fireEvent.click(buttons[0])
-      
+
       const colorItems = screen.getAllByRole('listitem')
-  
-      // should be changed to not use toBe
-      expect(colorItems.length).toBe(6)
+      
+      const buttons = screen.getAllByTitle(/add color/i)
+      fireEvent.click(buttons[1])
+
+      const rerenderedColorItems = screen.getAllByRole('listitem')
+      
+      expect(rerenderedColorItems.length).toBe(colorItems.length + 1)
+      expect(rerenderedColorItems[2]).not.toBe(colorItems[2])
     })
 
     test('color can be changed by user input', () => {
