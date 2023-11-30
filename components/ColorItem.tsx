@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { ColorItemProps } from "@/types";
 import { hexcolorRegex } from "@/tests/utils";
+import { generateRandomHex } from "@/lib/generateRandomHex";
+import Button from "./Button";
 
 const ColorItem = ({ color }: ColorItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [randomHexValues, setRandomHexValues] = useState<string[]>([]);
-
-  const generateRandomHex = (): string => {
-    return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
-  };
 
   const generateUniqueRandomHexValues = (count: number): string[] => {
     const hexValues: string[] = [];
@@ -43,35 +41,33 @@ const ColorItem = ({ color }: ColorItemProps) => {
   }, []);
 
   return (
-    <li className="flex w-full">
-      {isEditing ? (
-        <form onSubmit={handleFormSubmit}>
-          {randomHexValues.map((color, index) => (
-            <input
-              key={index}
-              type="text"
-              value={randomHexValues[4] || ''}
-              onChange={handleHexInputChange}
-              aria-label="Hex color"
-              onBlur={() => setIsEditing(false)}
-              autoFocus
-            />
-          ))}
-        </form>
-      ) : (
-        randomHexValues.map((color, index) => (
-          <button
-            onClick={handleHexButtonClick}
-            key={index}
-            style={{ backgroundColor: color }}
-            className={`text-center flex justify-between h-full w-full`}
-          >
-            <h3>{color}</h3>
-          </button>
-        ))
-      )}
-    </li>
+    <ul className="flex justify-evenly h-[80vh]">
+      {randomHexValues.map((color, index) => (
+        <li className="flex w-full" key={index} style={{ backgroundColor: color }}>
+          {isEditing ? (
+            <form onSubmit={handleFormSubmit}>
+              <input
+                type="text"
+                value={randomHexValues[4] || ''}
+                onChange={handleHexInputChange}
+                aria-label="Hex color"
+                onBlur={() => setIsEditing(false)}
+                autoFocus
+              />
+            </form>
+          ) : (
+            <Button
+              variant='ghost'
+              onClick={handleHexButtonClick}
+            >
+              <h3>{color}</h3>
+            </Button>
+          )}
+        </li>
+      ))}
+    </ul>
   );
+  
 };
 
 export default ColorItem;
