@@ -8,7 +8,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-blue text-neutral-100',
-        secondary: 'bg-orange text-neutral-100',
+        secondary: 'bg-inherit',
         outline: 'bg-none shadow-[inset_0_0_0_2px_#0015CE] text-neutral-900',
       },
     },
