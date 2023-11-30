@@ -1,10 +1,8 @@
 'use client'
 
-import Header from '@/components/Header'
-
-import { fetchData } from '@/lib/fetchData'
 import { useData } from '@/hooks/useData'
 import { useEffect } from 'react'
+import Header from '@/components/Header'
 
 const randomizeColors = async () => {
   // get random colors
