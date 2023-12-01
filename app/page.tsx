@@ -3,6 +3,7 @@
 import { useData } from '@/hooks/useData'
 import { useEffect } from 'react'
 import Header from '@/components/Header'
+import ColorList from '@/components/ColorList'
 
 const randomizeColors = async () => {
   // get random colors
@@ -18,7 +19,9 @@ export default function Home() {
   return (
     <>
       <Header randomizeColors={randomizeColors} />
-      <main>main</main>
+      <main>
+        <ColorList />
+      </main>
     </>
   )
 }
