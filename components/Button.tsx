@@ -8,8 +8,9 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-blue text-neutral-100',
-        secondary: 'bg-inherit',
+        secondary: 'bg-neutral-100',
         outline: 'bg-none shadow-[inset_0_0_0_2px_#0015CE] text-neutral-900',
+        ghost: 'w-full text-center h-[100px] relative top-40'
       },
     },
     defaultVariants: {

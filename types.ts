@@ -38,3 +38,11 @@ export type RemoveColorProps = {
 export type HeaderProps = {
   randomizeColors: () => void
 }
+
+export type dataResponse = {
+  data?: any
+  error?: {
+    status?: number
+    message: string
+  }
+}
