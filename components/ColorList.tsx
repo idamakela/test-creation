@@ -1,32 +1,47 @@
 'use client'
-import { ColorListProps, ColorItemProps } from '@/types'
+import { ColorListProps, color, ColorItemProps } from '@/types'
 import ColorItem from './ColorItem'
+import { generateRandomHex } from '@/lib/generateRandomHex'
 
-const ColorList = ({ colors }: ColorListProps) => {
+const ColorList = ({ colors, setColors }: ColorListProps) => {
   const addRandomColor = () => {
-    // Implement logic to add a random color
+    const newColor: color = {
+      hex: generateRandomHex(),
+      name: '',
+    }
+
+    setColors([...colors, newColor])
   }
 
-  const removeColor = (color: color) => {
-    // Implement logic to remove a color
+  const removeColor = (colorToRemove: color) => {
+    const removeColors = colors.filter((color) => color !== colorToRemove)
+    setColors(removeColors)
   }
 
   const changeColor = (oldColor: color, newColor: color) => {
-    // Implement logic to change a color
+    const updatedColors = colors.map((color) =>
+      color === oldColor ? { ...color, hex: newColor.hex } : color,
+    )
+    setColors(updatedColors)
+  }
+
+  const renderColorItem = (color: color, index: number): JSX.Element => {
+    const colorItemProps: ColorItemProps = {
+      color,
+      addRandomColor,
+      removeColor,
+      changeColor,
+      isLastColor: index === colors.length - 1,
+      amountOfColors: colors.length,
+    }
+
+    return <ColorItem key={index} {...colorItemProps} />
   }
 
   return (
-    <div role='list'>
-      <ColorItem
-        addRandomColor={addRandomColor}
-        removeColor={removeColor}
-        changeColor={changeColor}
-
-        // Suggestions of logis to props
-        // isLastColor={index === colors.length - 1}
-        // amountOfColors={colors.length}
-      />
-    </div>
+    <ul className='flex h-[80vh]'>
+      {colors.map((color, index) => renderColorItem(color, index))}
+    </ul>
   )
 }
 
