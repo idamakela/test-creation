@@ -1,5 +1,7 @@
+import ColorList from "@/components/ColorList"
+
 export default function Home() {
   return (
-    <main>main</main>
+    <main><ColorList /></main>
   )
 }
