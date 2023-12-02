@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ColorItemProps, color } from '@/types'
 import Button from './Button'
 
@@ -10,8 +10,13 @@ const ColorItem = ({
   isLastColor,
   amountOfColors,
 }: ColorItemProps) => {
+  const inputRef = useRef<color>() // ref for what?? button ??
   const [isEditing, setIsEditing] = useState(false)
   const [editedColor, setEditedColor] = useState<string>(color.hex)
+
+  const disableEditing = ()=> {
+    // ???
+  }
 
   const handleHexButtonClick = () => {
     setIsEditing(true)
