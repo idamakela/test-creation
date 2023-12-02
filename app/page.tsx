@@ -1,26 +1,34 @@
 'use client'
 
 import { useData } from '@/hooks/useData'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import ColorList from '@/components/ColorList'
-
-const randomizeColors = async () => {
-  // get random colors
-}
+import { generateRandomHex } from '@/lib/generateRandomHex'
 
 export default function Home() {
-  const data = useData('a3e2dd')
+  const [colors, setColors] = useState<color[]>([])
+
+  const randomizeColors = () => {
+    const randomHexValues: string[] = Array.from({ length: 5 }, () =>
+      generateRandomHex(),
+    )
+    const randomizedColors: color[] = randomHexValues.map((hex) => ({
+      hex,
+      name: '',
+    }))
+    setColors(randomizedColors)
+  }
 
   useEffect(() => {
-    console.log(data)
-  })
+    randomizeColors()
+  }, [])
 
   return (
     <>
       <Header randomizeColors={randomizeColors} />
       <main>
-        <ColorList />
+        <ColorList colors={colors} setColors={setColors} />
       </main>
     </>
   )

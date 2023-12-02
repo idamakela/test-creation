@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
-import { ColorItemProps } from '@/types'
-import { hexcolorRegex } from '@/tests/utils'
-import { generateRandomHex } from '@/lib/generateRandomHex'
+import { useState } from 'react'
+import { ColorItemProps, color } from '@/types'
 import Button from './Button'
 
 const ColorItem = ({
@@ -13,18 +11,7 @@ const ColorItem = ({
   amountOfColors,
 }: ColorItemProps) => {
   const [isEditing, setIsEditing] = useState(false)
-  const [randomHexValues, setRandomHexValues] = useState<string[]>([])
-
-  const generateUniqueRandomHexValues = (count: number): string[] => {
-    const hexValues: string[] = []
-    while (hexValues.length < count) {
-      const randomHex = generateRandomHex()
-      if (!hexValues.includes(randomHex)) {
-        hexValues.push(randomHex)
-      }
-    }
-    return hexValues
-  }
+  const [editedColor, setEditedColor] = useState<string>(color.hex)
 
   const handleHexButtonClick = () => {
     setIsEditing(true)
@@ -32,48 +19,51 @@ const ColorItem = ({
 
   const handleHexInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
-    if (newValue.match(hexcolorRegex)) {
-      setRandomHexValues([...randomHexValues.slice(0, 4), newValue])
-    }
+    setEditedColor(newValue)
   }
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    changeColor(color, { ...color, hex: editedColor }) // Update only the hex property
     setIsEditing(false)
   }
 
-  useEffect(() => {
-    const uniqueHexValues = generateUniqueRandomHexValues(5)
-    setRandomHexValues(uniqueHexValues)
-  }, [])
-
   return (
-    <ul className='flex h-[80vh] justify-evenly'>
-      {randomHexValues.map((color, index) => (
-        <li
-          className='flex w-full'
-          key={index}
-          style={{ backgroundColor: color }}
-        >
-          {isEditing ? (
-            <form onSubmit={handleFormSubmit}>
-              <input
-                type='text'
-                value={randomHexValues[4] || ''}
-                onChange={handleHexInputChange}
-                aria-label='Hex color'
-                onBlur={() => setIsEditing(false)}
-                autoFocus
-              />
-            </form>
-          ) : (
-            <Button variant='ghost' onClick={handleHexButtonClick}>
-              <h3>{color}</h3>
-            </Button>
-          )}
-        </li>
-      ))}
-    </ul>
+    <li
+      className='flex w-full flex-col items-center justify-center'
+      style={{ backgroundColor: color.hex }}
+    >
+      <div className='m-4'>
+        {isEditing ? (
+          <form onSubmit={handleFormSubmit}>
+            <input
+              type='text'
+              value={editedColor}
+              onChange={handleHexInputChange}
+              aria-label='Hex color'
+              onBlur={() => setIsEditing(false)}
+              autoFocus
+            />
+            <button type='submit'>Save</button>
+          </form>
+        ) : (
+          <Button variant='ghost' onClick={handleHexButtonClick}>
+            <h3>{color.hex}</h3>
+          </Button>
+        )}
+        <div>
+          <Button variant='outline' onClick={() => addRandomColor()}>
+            Add Color
+          </Button>
+          <Button variant='outline' onClick={() => removeColor(color)}>
+            Remove Color
+          </Button>
+          <Button variant='outline' onClick={() => setIsEditing(!isEditing)}>
+            Change Color
+          </Button>
+        </div>
+      </div>
+    </li>
   )
 }
 
