@@ -4,7 +4,7 @@ import { X } from 'lucide-react'
 
 const RemoveColor = ({ color, removeColor }: RemoveColorProps) => {
   return (
-    <Button variant={'secondary'} onClick={() => removeColor(color)}>
+    <Button title='remove color' variant={'secondary'} onClick={() => removeColor(color)}>
       <X size={18} />
     </Button>
   )

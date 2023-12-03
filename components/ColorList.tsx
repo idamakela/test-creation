@@ -5,6 +5,7 @@ import { generateRandomHex } from '@/lib/generateRandomHex'
 
 const ColorList = ({ colors, setColors }: ColorListProps) => {
   const addRandomColor = () => {
+    // behöver göras om pga home test
     const newColor: color = {
       hex: generateRandomHex(),
       name: '',
@@ -14,6 +15,7 @@ const ColorList = ({ colors, setColors }: ColorListProps) => {
   }
 
   const removeColor = (colorToRemove: color) => {
+    // Behöver göras om för att klara home test
     const removeColors = colors.filter((color) => color !== colorToRemove)
     setColors(removeColors)
   }

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { ColorItemProps, color } from '@/types'
 import Button from './Button'
+import RemoveColor from './RemoveColor'
+import AddColor from './AddColor'
 
 const ColorItem = ({
   color,
@@ -52,15 +54,19 @@ const ColorItem = ({
           </Button>
         )}
         <div>
-          <Button variant='outline' onClick={() => addRandomColor()}>
+          {/* <Button variant='outline' onClick={() => addRandomColor()}>
             Add Color
           </Button>
           <Button variant='outline' onClick={() => removeColor(color)}>
             Remove Color
-          </Button>
+          </Button> */}
           <Button variant='outline' onClick={() => setIsEditing(!isEditing)}>
             Change Color
           </Button>
+          {/**Behöver stylas så den hamnar på ett element och raderas just det specifika elementet */}
+          <RemoveColor color={color} removeColor={removeColor} />
+          {/**Behöver stylas så den hamnar emellan två element och kan lägga till en färg på det området */}
+          <AddColor  addRandomColor={addRandomColor}/>
         </div>
       </div>
     </li>

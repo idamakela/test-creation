@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react'
 
 const AddColor = ({ addRandomColor }: AddColorProps) => {
   return (
-    <Button variant={'secondary'} onClick={addRandomColor}>
+    <Button title='add color' variant={'secondary'} onClick={addRandomColor}>
       <Plus size={18} />
     </Button>
   )
