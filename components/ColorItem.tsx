@@ -26,9 +26,15 @@ const ColorItem = ({
 
   return (
     <li
-      className='flex w-full flex-col items-center justify-center'
+      className='relative flex h-full w-full flex-col items-center justify-center'
       style={{ backgroundColor: color.hex }}
     >
+      <div className='group/add absolute bottom-auto right-0 top-0 z-50 flex h-full w-1/5 items-center bg-inherit'>
+        {isLastColor && <AddColor addRandomColor={addRandomColor} />}
+      </div>
+      <div className='h-1/2 items-end flex bg-inherit group/remove'>
+        <RemoveColor color={color} removeColor={removeColor} />
+      </div>
       <div className='m-4'>
         {isEditing ? (
           <ChangeColor
@@ -42,21 +48,9 @@ const ColorItem = ({
             <h3>{color.hex}</h3>
           </Button>
         )}
-        <div>
-          {/* <Button variant='outline' onClick={() => addRandomColor()}>
-            Add Color
-          </Button>
-          <Button variant='outline' onClick={() => removeColor(color)}>
-            Remove Color
-          </Button> */}
-          <Button variant='outline' onClick={() => setIsEditing(!isEditing)}>
-            Change Color
-          </Button>
-          {/**Behöver stylas så den hamnar på ett element och raderas just det specifika elementet */}
-          <RemoveColor color={color} removeColor={removeColor} />
-          {/**Behöver stylas så den hamnar emellan två element och kan lägga till en färg på det området */}
-          <AddColor  addRandomColor={addRandomColor}/>
-        </div>
+      </div>
+      <div className='group/add absolute bottom-auto left-0 top-0 z-50 flex h-full w-1/5 items-center bg-inherit'>
+        <AddColor addRandomColor={addRandomColor} />
       </div>
     </li>
   )
