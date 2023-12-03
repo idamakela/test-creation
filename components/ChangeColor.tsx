@@ -1,6 +1,8 @@
 'use client'
 
-import { ChangeColorProps, color as ColorType } from '@/types'
+import { ChangeColorProps } from '@/types'
+import { useState } from 'react'
+import { hexcolorRegex } from '@/tests/utils'
 
 const ChangeColor = ({
   color,
@@ -8,15 +10,30 @@ const ChangeColor = ({
   disableEditing,
   inputRef,
 }: ChangeColorProps) => {
-  const oldColor: ColorType | undefined = color
-  const newColor: ColorType | undefined = inputRef?.current // .????
+  const [editedColor, setEditedColor] = useState<string>(color.hex)
+
+  const handleHexInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value
+
+    // if (!hexcolorRegex.test(newValue)) {
+    //   alert('Please enter a hex value')
+    // }
+
+    setEditedColor(newValue)
+  }
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    changeColor(color, { ...color, hex: editedColor }) // Update only the hex property
+    disableEditing()
+  }
 
   /**
    * is inputRef a forward ref? or the button in color item?
    */
 
   return (
-    <form aria-label='change-color'>
+    <form aria-label='change-color' onSubmit={handleFormSubmit}>
       <label hidden htmlFor='hex-color'>
         Hex Color
       </label>
@@ -25,7 +42,8 @@ const ChangeColor = ({
         name='hex'
         type='text'
         onBlur={disableEditing}
-        onChange={() => changeColor(oldColor, newColor)} // props!!
+        onChange={handleHexInputChange}
+        value={editedColor}
         autoFocus
       />
     </form>

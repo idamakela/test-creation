@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import ColorList from '@/components/ColorList'
 import { generateRandomHex } from '@/lib/generateRandomHex'
+import { color } from '@/types'
 
 export default function Home() {
   const [colors, setColors] = useState<color[]>([])
