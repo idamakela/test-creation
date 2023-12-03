@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { ColorItemProps, color } from '@/types'
+import { useRef, useState } from 'react'
+import { ColorItemProps } from '@/types'
 import Button from './Button'
 import RemoveColor from './RemoveColor'
 import AddColor from './AddColor'
+import ChangeColor from './ChangeColor'
 
 const ColorItem = ({
   color,
@@ -12,22 +13,15 @@ const ColorItem = ({
   isLastColor,
   amountOfColors,
 }: ColorItemProps) => {
+  const inputRef = useRef() // ref for what?? button ??
   const [isEditing, setIsEditing] = useState(false)
-  const [editedColor, setEditedColor] = useState<string>(color.hex)
+
+  const disableEditing = () => {
+    setIsEditing(false)
+  }
 
   const handleHexButtonClick = () => {
     setIsEditing(true)
-  }
-
-  const handleHexInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value
-    setEditedColor(newValue)
-  }
-
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    changeColor(color, { ...color, hex: editedColor }) // Update only the hex property
-    setIsEditing(false)
   }
 
   return (
@@ -37,17 +31,12 @@ const ColorItem = ({
     >
       <div className='m-4'>
         {isEditing ? (
-          <form onSubmit={handleFormSubmit}>
-            <input
-              type='text'
-              value={editedColor}
-              onChange={handleHexInputChange}
-              aria-label='Hex color'
-              onBlur={() => setIsEditing(false)}
-              autoFocus
-            />
-            <button type='submit'>Save</button>
-          </form>
+          <ChangeColor
+            color={color}
+            changeColor={changeColor}
+            disableEditing={disableEditing}
+            inputRef={inputRef}
+          />
         ) : (
           <Button variant='ghost' onClick={handleHexButtonClick}>
             <h3>{color.hex}</h3>

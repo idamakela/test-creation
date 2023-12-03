@@ -6,7 +6,7 @@ const mockProps = {
   color: mockColor,
   changeColor: jest.fn(),
   disableEditing: jest.fn(),
-  inputRef: null
+  inputRef: null,
 }
 
 describe('Change color', () => {

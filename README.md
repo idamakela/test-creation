@@ -1,4 +1,5 @@
 # Hello and welcome to your Coolors dupe
+
 the app will be very similar to [Coolors](https://coolors.co/1b2f33-28502e-47682c-8c7051-ef3054) and should let the user generate beautiful color palettes. see more detailed features [below](#features)
 
 this is a next.js app that uses typeScript and has been prepared to use tailwind, feel free to change the means of styling to your preference though
@@ -30,6 +31,7 @@ npm run test:watch
 ```
 
 ## Features
+
 - a header with the page name and a randomizer button
 - display 5 random colors on page load
   - you can never display more than 10 colors
@@ -47,6 +49,7 @@ npm run test:watch
 - clicking the button in the header should randomize a new color for all the existing shown color
 
 ### Components
+
 - Header
 - ColorList
 - ColorItem
