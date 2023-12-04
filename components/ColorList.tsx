@@ -10,20 +10,22 @@ const ColorList = ({ colors, setColors }: ColorListProps) => {
     /**
      * lägga till den till vänster om aktuell knapp - om ej isLastItem -> lägg till till höger
      */
-
-    const newColor: color = {
-      hex: generateRandomHex(),
-      name: '',
+    if (colors.length < 7) {
+      const newColor = {
+        hex: generateRandomHex(),
+        name: '',
+      }
+      setColors([...colors, newColor])
     }
-
-    setColors([...colors, newColor])
   }
 
   const removeColor = (colorToRemove: color) => {
     // Behöver göras om för att klara home test
 
-    const removeColors = colors.filter((color) => color !== colorToRemove)
-    setColors(removeColors)
+    if (colors.length > 1) {
+      const updatedColors = colors.filter((color) => color !== colorToRemove)
+      setColors(updatedColors)
+    }
   }
 
   const changeColor = (oldColor: color, newColor: color) => {

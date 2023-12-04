@@ -4,6 +4,7 @@ import Button from './Button'
 import RemoveColor from './RemoveColor'
 import AddColor from './AddColor'
 import ChangeColor from './ChangeColor'
+import { hexcolorRegex } from '@/tests/utils'
 
 const ColorItem = ({
   color,
@@ -13,8 +14,9 @@ const ColorItem = ({
   isLastColor,
   amountOfColors,
 }: ColorItemProps) => {
-  const inputRef = useRef() // ref for what?? button ??
+  const inputRef = useRef()
   const [isEditing, setIsEditing] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const disableEditing = () => {
     setIsEditing(false)
@@ -22,6 +24,10 @@ const ColorItem = ({
 
   const handleHexButtonClick = () => {
     setIsEditing(true)
+  }
+
+  const validateHex = (hex: string): boolean => {
+    return /^#?[a-fA-F0-9]{6}$/.test(hex)
   }
 
   return (
@@ -42,16 +48,24 @@ const ColorItem = ({
       )}
 
       <div className='m-4'>
+        <h3 className='text-center'>{color.name ? color.name : ''}</h3>
         {isEditing ? (
-          <ChangeColor
-            color={color}
-            changeColor={changeColor}
-            disableEditing={disableEditing}
-            inputRef={inputRef}
-          />
+          <div>
+            <ChangeColor
+              color={color}
+              changeColor={changeColor}
+              disableEditing={disableEditing}
+              inputRef={inputRef}
+            />
+            {errorMessage && <p>{errorMessage}</p>}
+          </div>
         ) : (
-          <Button variant='ghost' onClick={handleHexButtonClick}>
-            <h3>{color.hex}</h3>
+          <Button
+            variant='ghost'
+            name={color.hex.match(hexcolorRegex) ? color.hex : '#000000'}
+            onClick={handleHexButtonClick}
+          >
+            {color.hex}
           </Button>
         )}
       </div>
