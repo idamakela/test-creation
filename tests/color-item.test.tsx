@@ -9,7 +9,7 @@ const mockProps = {
   removeColor: jest.fn(),
   changeColor: jest.fn(),
   isLastColor: false,
-  amountOfColors: 5
+  amountOfColors: 5,
 }
 
 describe('Color item', () => {
@@ -30,7 +30,7 @@ describe('Color item', () => {
       expect(hexButton).toBeInTheDocument()
       expect(hexButton.textContent).toMatch(hexcolorRegex)
     })
-    
+
     test('it displays the name of the color as a heading', () => {
       render(<ColorItem {...mockProps} />)
 
@@ -55,17 +55,11 @@ describe('Color item', () => {
         name: 'white',
       }
 
-      render(
-        <ColorItem
-          color={colorWithShortHex}
-          {...rest}
-        />
-      )
+      render(<ColorItem color={colorWithShortHex} {...rest} />)
 
       const hexButton = screen.getByRole('button', { name: hexcolorRegex })
 
       expect(hexButton.textContent).toMatch(hexcolorRegex)
-
     })
   })
 
@@ -75,7 +69,7 @@ describe('Color item', () => {
 
       const hexButton = screen.getByRole('button', { name: hexcolorRegex })
       fireEvent.click(hexButton)
-      
+
       const hexInput = screen.queryByLabelText(/hex color/i)
 
       expect(hexButton).not.toBeInTheDocument()
@@ -102,7 +96,9 @@ describe('Color item', () => {
       const form = screen.getByRole('form', { name: 'change-color' })
       fireEvent.submit(form)
 
-      const rerenderedHexButton = screen.getByRole('button', { name: hexcolorRegex })
+      const rerenderedHexButton = screen.getByRole('button', {
+        name: hexcolorRegex,
+      })
 
       expect(rerenderedHexButton).toBeInTheDocument()
       expect(form).not.toBeInTheDocument()
@@ -113,11 +109,13 @@ describe('Color item', () => {
 
       const hexButton = screen.getByRole('button', { name: hexcolorRegex })
       fireEvent.click(hexButton)
-      
+
       const hexInput = screen.getByLabelText(/hex color/i)
       fireEvent.blur(hexInput)
-      
-      const rerenderedHexButton = screen.getByRole('button', { name: hexcolorRegex })
+
+      const rerenderedHexButton = screen.getByRole('button', {
+        name: hexcolorRegex,
+      })
 
       expect(rerenderedHexButton).toBeInTheDocument()
       expect(hexInput).not.toBeInTheDocument()
