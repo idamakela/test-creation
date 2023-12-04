@@ -56,3 +56,7 @@ npm run test:watch
 - AddColor
 - RemoveColor
 - ChangeColor
+
+# Feedback
+
+- Bra tester och instruktioner överlag. Det vart tydligt med Types, Utils, Readme och testerna.

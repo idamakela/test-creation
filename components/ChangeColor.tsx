@@ -24,7 +24,10 @@ const ChangeColor = ({
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    changeColor(color, { ...color, hex: editedColor }) // Update only the hex property
+
+    if (inputRef?.current?.value.match(hexcolorRegex)) {
+      changeColor(color, { ...color, hex: editedColor })
+    } // Update only the hex property'
     disableEditing()
   }
 
@@ -38,6 +41,7 @@ const ChangeColor = ({
         Hex Color
       </label>
       <input
+        ref={inputRef}
         id='hex-color'
         name='hex'
         type='text'

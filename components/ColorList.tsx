@@ -5,17 +5,20 @@ import { generateRandomHex } from '@/lib/generateRandomHex'
 
 const ColorList = ({ colors, setColors }: ColorListProps) => {
   const addRandomColor = () => {
-    const newColor: color = {
-      hex: generateRandomHex(),
-      name: '',
+    if (colors.length < 7) {
+      const newColor = {
+        hex: generateRandomHex(),
+        name: '',
+      }
+      setColors([...colors, newColor])
     }
-
-    setColors([...colors, newColor])
   }
 
   const removeColor = (colorToRemove: color) => {
-    const removeColors = colors.filter((color) => color !== colorToRemove)
-    setColors(removeColors)
+    if (colors.length > 1) {
+      const updatedColors = colors.filter((color) => color !== colorToRemove)
+      setColors(updatedColors)
+    }
   }
 
   const changeColor = (oldColor: color, newColor: color) => {
