@@ -8,7 +8,7 @@ const RemoveColor = ({ color, removeColor }: RemoveColorProps) => {
       title='remove color'
       variant='secondary'
       onClick={() => removeColor(color)}
-      className='opacity-0 group-hover/remove:opacity-100'
+      className='relative md:opacity-0 md:group-hover/remove:opacity-100'
     >
       <X size={18} />
     </Button>

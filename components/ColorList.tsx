@@ -49,7 +49,7 @@ const ColorList = ({ colors, setColors }: ColorListProps) => {
   }
 
   return (
-    <ul className='flex h-[80vh]'>
+    <ul className='flex h-[88vh] flex-col md:flex-row'>
       {colors.map((color, index) => renderColorItem(color, index))}
     </ul>
   )

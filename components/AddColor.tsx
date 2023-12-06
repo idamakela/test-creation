@@ -9,7 +9,7 @@ const AddColor = ({ addRandomColor }: AddColorProps) => {
       title='add color'
       variant={'secondary'}
       onClick={addRandomColor}
-      className='group-hover/add:opacity-100 opacity-0 relative -left-[21px]'
+      className='relative md:-left-[21px] md:opacity-0 md:group-hover/add:opacity-100'
     >
       <Plus size={18} />
     </Button>

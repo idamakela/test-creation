@@ -36,13 +36,13 @@ const ColorItem = ({
       style={{ backgroundColor: color.hex }}
     >
       {amountOfColors < 10 && (
-        <div className='group/add absolute bottom-auto right-0 top-0 z-50 flex h-full w-1/5 items-center bg-inherit'>
+        <div className='group/add absolute bottom-auto right-0 top-0 z-50 hidden h-full w-1/5 items-center bg-inherit md:flex'>
           {isLastColor && <AddColor addRandomColor={addRandomColor} />}
         </div>
       )}
 
       {amountOfColors > 2 && (
-        <div className='group/remove flex h-1/2 items-end bg-inherit'>
+        <div className='group/remove absolute right-4 md:static md:right-0 md:flex md:h-1/2 md:items-end md:bg-inherit'>
           <RemoveColor color={color} removeColor={removeColor} />
         </div>
       )}
@@ -70,7 +70,7 @@ const ColorItem = ({
         )}
       </div>
       {amountOfColors < 10 && (
-        <div className='group/add absolute bottom-auto left-0 top-0 z-50 flex h-full w-1/5 items-center bg-inherit'>
+        <div className='group/add absolute bottom-auto left-4 top-0 z-50 flex h-full w-1/5 items-center bg-inherit md:left-0'>
           <AddColor addRandomColor={addRandomColor} />
         </div>
       )}
