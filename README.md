@@ -59,4 +59,7 @@ npm run test:watch
 
 # Feedback
 
-- Bra tester och instruktioner överlag. Det vart tydligt med Types, Utils, Readme och testerna.
+- Great tests and instructions overall. The structure with Types, Utils, Readme, and tests was clear and helpful.
+- The test in `ColorItem` regarding 'the hex code is always displayed with seven characters' could be reformulated. None of the developers understood its purpose before it was explained. Possibly rephrase it as: 'The user can input two or three characters in the input; it should then auto-fill to ensure the hex code always displays seven characters.'
+
+### Thanks Ella for a fun project!
