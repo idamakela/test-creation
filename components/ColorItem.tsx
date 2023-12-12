@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { ColorItemProps } from '@/types'
 import Button from './Button'
 import RemoveColor from './RemoveColor'
