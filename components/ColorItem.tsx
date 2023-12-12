@@ -14,7 +14,7 @@ const ColorItem = ({
   isLastColor,
   amountOfColors,
 }: ColorItemProps) => {
-  const inputRef = useRef()
+  const inputRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
